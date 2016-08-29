@@ -31,13 +31,14 @@ float division(float a,float b)
     return resultadoDiv;
 }
 
-float factorial(int a)
+int factorial(int a)
 {
-    int temp=a-1;
-    int fac = a;
-    while(temp>=1)
+    int temp=a;
+    int fac=a;
+    while(temp>1)
     {
-        fac=a*temp;
+        temp=temp-1;
+        fac=fac*temp;
     }
     return fac;
 }
