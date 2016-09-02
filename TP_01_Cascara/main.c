@@ -2,11 +2,6 @@
 #include <stdlib.h>
 #include "funciones.h"
 
-float suma(float a,float b);
-float resta(float a,float b);
-float multiplicacion(float a,float b);
-float division(float a,float b);
-int factorial(int a);
 
 int main()
 {
@@ -15,20 +10,17 @@ int main()
     float numeroUno;
     float numeroDos;
     float resultado;
+    char menu;
+    char error;
+    int desde;
+    int hasta;
 
-    while(seguir=='s')
-    {
-        printf("1- Ingresar 1er operando (A=y)\n");
-        printf("2- Ingresar 2do operando (B=y)\n");
-        printf("3- Calcular la suma (A+B)\n");
-        printf("4- Calcular la resta (A-B)\n");
-        printf("5- Calcular la division (A/B)\n");
-        printf("6- Calcular la multiplicacion (A*B)\n");
-        printf("7- Calcular el factorial (A!)\n");
-        printf("8- Calcular todas las operacione\n");
-        printf("9- Salir\n");
+    menu = "1- Ingresar 1er operando (A=y)\n 2- Ingresar 2do operando (B=y)\n 3- Calcular la suma (A+B)\n 4- Calcular la resta (A-B)\n 5- Calcular la division (A/B)\n 6- Calcular la multiplicacion (A*B)\n 7- Calcular el factorial (A!)\n 8- Calcular todas las operacione\n 9- Salir\n";
+    error= "Error. Desea continuar?";
+    desde=1;
+    hasta=9;
 
-        scanf("%d",&opcion);
+    opcion=Options(menu,error,desde,hasta);
 
         switch(opcion)
         {
@@ -66,7 +58,7 @@ int main()
                 seguir = 'n';
                 break;
         }
-    }
+
 
     return 0;
 }
