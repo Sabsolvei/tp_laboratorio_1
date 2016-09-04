@@ -9,24 +9,27 @@ int Options(char menu[], char error[], int desde, int hasta)
 
     do
     {
-        printf("%s", menu);
-        scanf("%d",opcion);
-        if(opcion<desde || opcion>hasta)
+
+        printf("%s",menu);
+        fflush(stdin);
+        scanf("%d",&opcion);
+
+        if(opcion>=desde && opcion<=hasta)
         {
-            printf("%s",error);
-            scanf("%s",respuesta);
-            opcion=-1;
+            respuesta='n';
         }
         else
         {
-            respuesta='n';
+            printf("%s",error);
+            fflush(stdin);
+            scanf("%s",&respuesta);
+            opcion=-1;
         }
     }
     while(respuesta=='s');
 
     return opcion;
 }
-
 
 
 float suma(float a, float b)
@@ -59,14 +62,14 @@ float division(float a,float b)
 
 int factorial(int a)
 {
+    int i=0;
     int temp=a;
-    int fac=a;
-    while(temp>1)
+
+    for(i=1;i<a;i++)
     {
-        temp=temp-1;
-        fac=fac*temp;
+        temp=i*temp;
     }
-    return fac;
+    return temp;
 }
 
 
