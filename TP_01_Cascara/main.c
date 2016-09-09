@@ -13,26 +13,27 @@ int main()
     float resultado;
     int resulfac;
     char menu1[50] = "\n1- Ingresar numeros\n2- Salir\n";
-    char menu2[400] = "\nElija la operacion que desea realizar: \n1- Calcular la suma (A+B)\n2- Calcular la resta (A-B)\n3- Calcular la division (A/B)\n4- Calcular la multiplicacion (A*B)\n5- Calcular el factorial (A!)\n6- Calcular todas las operaciones\n7- Salir\n";
+    char menu2[400] = "\nCalcular la suma (A+B)\n2- Calcular la resta (A-B)\n3- Calcular la division (A/B)\n4- Calcular la multiplicacion (A*B)\n5- Calcular el factorial (A!)\n6- Calcular todas las operaciones\n7- Salir\n";
     char error[80] = "\nLa opcion ingresada no es correcta. Desea continuar? Ingrese 's' o 'n'\n";
     int desde;
     int hasta;
     int flag=1;
-    desde=1;
-    hasta=2;
 
     do
     {
         do
         {
+            desde=1;
+            hasta=2;
             opcion = Options(menu1,error,desde,hasta);
 
             if(opcion == 1)
             {
+
                 system("cls");
                 printf("1- Ingresar 1er operando (A=x)\n");
                 scanf("%f",&numeroUno);
-                //numeroUno= validarNumero();
+                //numeroUno= validarNumero(numeroUno);
 
                 printf("2- Ingresar 2do operando (B=y)\n");
                 scanf("%f",&numeroDos);
@@ -41,11 +42,17 @@ int main()
                 desde = 1;
                 hasta = 7;
                 system("cls");
+                printf("Según A= %.2f y B=%.2f, elija la operacion que desea realizar: \n",numeroUno,numeroDos);
+
                 opcion = Options(menu2,error,desde,hasta);
 
                 if((numeroDos==0 && opcion==3) || (numeroDos==0 && opcion==6))
                 {
                    printf("No es posible dividir a cero. Vuelva a ingresar los operandos: ");
+                }
+                else if((numeroUno<=0 && opcion==5)||(numeroUno<=0 && opcion==6))
+                {
+                    printf("Error. Para calcular factorial ingrese un numero entero positivo: ");
                 }
                 else
                 {

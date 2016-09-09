@@ -44,13 +44,14 @@ int Options(char menu[], char error[], int desde, int hasta)
  * \param Numero de operando ingresado.
  * \return Devuelve numero valido para operar.
  */
-/*float validarNumero(float numero)
+ /*
+float validarNumero(float numero)
 {
     float aux;
     aux = scanf("%f",&numero);
     while (aux<=0)
     {
-        fflush(stdin);
+        //fflush(stdin);
         printf("\nEl dato ingresado es invalido. Ingrese un numero: ");
         aux = scanf("%f",&numero);
     }
@@ -58,6 +59,7 @@ int Options(char menu[], char error[], int desde, int hasta)
 
 }
 */
+
 
 /** \brief Realiza la suma.
  * \param Operando A.
