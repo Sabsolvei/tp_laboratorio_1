@@ -22,15 +22,23 @@ int main()
         switch(opcion)
         {
             case 1:
-                altaPersona (persona,pos);
-                pos++;
+                if(pos<C)
+                {
+                    altaPersona (persona,pos);
+                    pos++;
+                }
+                else{
+                    printf("No puede ingresar mas personas. \n");
+                    printf("\n");
+                }
             break;
 
             case 2:
-                //FUNCION BORRAR
+                bajaPersona (persona);
                 break;
             case 3:
-                //FUNCION LISTAR
+
+                listarPersonas(persona);
                 break;
             case 4:
                 //FUNCION GRAFICO

@@ -28,6 +28,8 @@ typedef struct {
 
 int validarMenu(eMenu opciones);
 void altaPersona(ePersona persona[],int);
+void bajaPersona (ePersona persona[]);
+void listarPersonas(ePersona persona[]);
 int validarString(eValidar cadena);
 int validarInt(eValidar cadena);
 /*

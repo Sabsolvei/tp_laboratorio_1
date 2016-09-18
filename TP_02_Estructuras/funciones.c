@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "funciones.h"
 #define C 3
+
 int validarMenu (eMenu opciones)
 {
     int opcion;
@@ -35,13 +36,12 @@ int validarMenu (eMenu opciones)
 void altaPersona(ePersona persona[],int pos)
 {
     eValidar cadena;
-    cadena.minimo=1;
-    cadena.maximo=50;
     char seguir='s';
-
 
     while(seguir=='s')
     {
+        cadena.minimo=1;
+        cadena.maximo=50;
         printf("ingrese nombre: ");
         fflush(stdin);
         gets(cadena.buffer);
@@ -57,7 +57,6 @@ void altaPersona(ePersona persona[],int pos)
             getc(seguir);
         }
     }
-
 
     while(seguir=='s')
     {
@@ -79,7 +78,6 @@ void altaPersona(ePersona persona[],int pos)
         }
     }
 
-
     while(seguir=='s')
     {
         printf("Ingrese DNI: ");
@@ -100,13 +98,13 @@ void altaPersona(ePersona persona[],int pos)
         }
     }
 
-
     if(seguir=='s')
     {
         persona[pos].estado=1;
     }
 
 }
+
 
 int validarInt(eValidar cadena)
 {
@@ -122,6 +120,7 @@ int validarInt(eValidar cadena)
     }
 }
 
+
 int validarString(eValidar cadena)
 {
     if((strlen(cadena.buffer)>= cadena.minimo) && (strlen(cadena.buffer)<=cadena.maximo))
@@ -133,4 +132,63 @@ int validarString(eValidar cadena)
         return 0;
     }
 }
+
+
+void bajaPersona (ePersona persona[])
+{
+    char auxDni[20], seguir='s';
+    int i;
+    do
+    {
+        printf("Ingrese el DNI de la persona a eliminar: ");
+        fflush(stdin);
+        gets(auxDni);
+        for(i=0;i<(sizeof(persona));i++)
+        {
+            if(strcmp(persona[i].dni,auxDni)==0)
+            {
+                persona[i].estado=0;
+                printf("Persona eliminada exitosamente.\n\n");
+                seguir='n';
+                break;
+            }
+        }
+        if(seguir=='s')
+           {
+                printf("El dni ingresado no existe. ¿Desea volver a ingresar el dni? s/n: ");
+                getc(seguir);
+           }
+    }
+    while(seguir=='s');
+
+}
+
+void listarPersonas(ePersona persona[])
+{
+    int i;
+    int j;
+    ePersona personaAux;
+    printf("DNI\t NOMBRE\t EDAD\t ESTADO\n");
+    for(i=0;i<(sizeof(persona)-1);i++)
+    {
+        if(persona[i].estado==1)
+        {
+            for(j=i+1;j<(sizeof(persona));j++)
+            {
+                if(persona[j].estado==1 && strcmp(persona[j].nombre,persona[i].nombre)>0)
+                {
+                    personaAux=persona[i];
+                    persona[i]=persona[j];
+                    persona[j]=personaAux;
+
+                    printf("%s\t%s\t%d\t%d\n",persona[i].nombre,persona[i].dni,persona[i].edad,persona[i].estado);
+                }
+            }
+
+        }
+
+    }
+    printf("%s\t%s\t%d\t%d\n",persona[i].nombre,persona[i].dni,persona[i].edad,persona[i].estado);
+}
+
 
