@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "funciones.h"
-#define C 3
 
 int validarMenu (eMenu opciones)
 {
@@ -33,7 +32,39 @@ int validarMenu (eMenu opciones)
     return opcion;
 }
 
-void altaPersona(ePersona persona[],int pos)
+void asignarEstado (ePersona persona[],int C,int estado)
+{
+    int i;
+    for (i=0;i<C;i++)
+    {
+        persona[i].estado=estado;
+    }
+}
+
+int buscarIndiceLibre (ePersona persona[],int C)
+{
+    int i = 0;
+    int flag=0;
+
+    for(i=0;i<C;i++)
+    {
+        if(persona[i].estado==-1)
+        {
+            flag=1;
+            break;
+        }
+    }
+
+    if(flag==1)
+    {
+        return i;
+    }else
+    {
+        return -1; //si no encuentra ubicacion
+    }
+}
+
+void altaPersona(ePersona persona[],int pos,int C)
 {
     eValidar cadena;
     char seguir='s';
@@ -54,6 +85,7 @@ void altaPersona(ePersona persona[],int pos)
         else
         {
             printf("Nombre invalido, debe ingresar entre 1 y 50 caracteres.\n¿Desea continuar? s/n: ");
+            fflush(stdin);
             getc(seguir);
         }
     }
@@ -94,6 +126,7 @@ void altaPersona(ePersona persona[],int pos)
         else
         {
             printf("DNI invalido, debe ingresar entre 5 y 20 caracteres.\n¿Desea continuar? s/n: ");
+            fflush(stdin);
             getc(seguir);
         }
     }
@@ -133,47 +166,47 @@ int validarString(eValidar cadena)
     }
 }
 
-
-void bajaPersona (ePersona persona[])
+int buscarPorDni(ePersona persona[], int dni, int C)
 {
-    char auxDni[20], seguir='s';
     int i;
-    do
-    {
-        printf("Ingrese el DNI de la persona a eliminar: ");
-        fflush(stdin);
-        gets(auxDni);
-        for(i=0;i<(sizeof(persona));i++)
-        {
-            if(strcmp(persona[i].dni,auxDni)==0)
-            {
-                persona[i].estado=0;
-                printf("Persona eliminada exitosamente.\n\n");
-                seguir='n';
-                break;
-            }
-        }
-        if(seguir=='s')
-           {
-                printf("El dni ingresado no existe. ¿Desea volver a ingresar el dni? s/n: ");
-                getc(seguir);
-           }
-    }
-    while(seguir=='s');
+    int flag = 0;
 
+    for(i=0;i<C;i++)
+    {
+        if(persona[i].dni == dni)
+        {
+            flag=1;
+            break;
+        }
+    }
+    if(flag == 1)
+    {
+        return i;
+    }
+    else
+    {
+        return -1;
+    }
 }
 
-void listarPersonas(ePersona persona[])
+void bajaPersona (ePersona persona[],int C,int pos)
+{
+    persona[pos].estado=0;
+    printf("Persona eliminada exitosamente.\n\n");
+}
+
+
+void listarPersonas(ePersona persona[],int C)
 {
     int i;
     int j;
     ePersona personaAux;
     printf("DNI\t NOMBRE\t EDAD\t ESTADO\n");
-    for(i=0;i<(sizeof(persona)-1);i++)
+    for(i=0;i<C-1;i++)
     {
         if(persona[i].estado==1)
         {
-            for(j=i+1;j<(sizeof(persona));j++)
+            for(j=i+1;j<C;j++)
             {
                 if(persona[j].estado==1 && strcmp(persona[j].nombre,persona[i].nombre)>0)
                 {

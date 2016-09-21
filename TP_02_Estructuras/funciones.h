@@ -26,13 +26,14 @@ typedef struct {
 
 }ePersona;
 
+void asignarEstado (ePersona persona[],int C,int estado);
 int validarMenu(eMenu opciones);
-void altaPersona(ePersona persona[],int);
-void bajaPersona (ePersona persona[]);
-void listarPersonas(ePersona persona[]);
+void altaPersona(ePersona persona[],int pos, int C);
+void bajaPersona (ePersona persona[],int C, int pos);
+void listarPersonas(ePersona persona[],int);
 int validarString(eValidar cadena);
 int validarInt(eValidar cadena);
-/*
+
 
 
 /**
@@ -40,9 +41,8 @@ int validarInt(eValidar cadena);
  * @param lista el array se pasa como parametro.
  * @return el primer indice disponible
  */
+int buscarIndiceLibre (ePersona persona[],int C);
 
- /*
-int obtenerEspacioLibre(EPersona lista[]);
 
 /**
  * Obtiene el indice que coincide con el dni pasado por parametro.
@@ -50,9 +50,5 @@ int obtenerEspacioLibre(EPersona lista[]);
  * @param dni el dni a ser buscado en el array.
  * @return el indice en donde se encuentra el elemento que coincide con el parametro dni
  */
+int buscarPorDni(ePersona lista[], int dni, int C);
 
-/*
-int buscarPorDni(EPersona lista[], int dni);
-
-#endif // FUNCIONES_H_INCLUDED
-*/
