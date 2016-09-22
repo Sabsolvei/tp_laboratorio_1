@@ -26,10 +26,11 @@ typedef struct {
 
 }ePersona;
 
+void hardcodeo(ePersona persona[],int Caux);
 void asignarEstado (ePersona persona[],int C,int estado);
 int validarMenu(eMenu opciones);
-void altaPersona(ePersona persona[],int pos, int C);
-void bajaPersona (ePersona persona[],int C, int pos);
+void altaPersona(ePersona persona[],int indice,int estado);
+void bajaPersona (ePersona persona[],int C, int indice);
 void listarPersonas(ePersona persona[],int);
 int validarString(eValidar cadena);
 int validarInt(eValidar cadena);
@@ -50,5 +51,5 @@ int buscarIndiceLibre (ePersona persona[],int C);
  * @param dni el dni a ser buscado en el array.
  * @return el indice en donde se encuentra el elemento que coincide con el parametro dni
  */
-int buscarPorDni(ePersona lista[], int dni, int C);
+int buscarPorDni(ePersona lista[], char dni[], int C);
 

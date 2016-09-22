@@ -1,15 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "funciones.h"
-#define C 3
+#define Caux 5
+#define C 20
 #define VACIO -1
 #define ALTA 1
 #define BAJA 0
 
 int main()
 {
-
     ePersona persona[C];
+    asignarEstado (persona,C,VACIO);
+    hardcodeo(persona,Caux);
     eMenu opciones;
     strcpy(opciones.menu,"1. Agregar una persona.\n2. Borrar una persona.\n3. Imprimir lista ordenada por nombre.\n4. Imprimir grafico de edades.\n5. Salir.\nINGRESE UNA OPCION: ");
     strcpy(opciones.error,"Ingreso una opcion invalida. Desea continuar? s/n: ");
@@ -17,10 +19,9 @@ int main()
     opciones.hasta=5;
     int opcion;
     char seguir='s';
-    int pos=0;
+    int indice=0;
     char dni[20];
 
-    asignarEstado(persona,C,VACIO);
 
     do
     {
@@ -30,30 +31,31 @@ int main()
         {
             case 1:
 
-                pos=buscarIndiceLibre(persona,C);
+                indice=buscarIndiceLibre(persona,C);
 
-                if(pos >= 0)
+                if(indice >= 0)
                 {
-                    altaPersona(persona,pos,C);
+                    altaPersona(persona,indice,ALTA);
                 }
                 else
                 {
-                    printf("Supero el espacio permitido para carga.");
+                    printf("Supero el espacio permitido para carga.\n");
                 }
                 break;
             case 2:
 
                 printf("Ingrese DNI a eliminar: ");
+                fflush(stdin);
                 gets(dni);
-                pos=buscarPorDni(persona, dni, C);
+                indice=buscarPorDni(persona, dni, C);
 
-                if(pos >= 0)
+                if(indice >= 0)
                 {
-                    bajaPersona (persona,C,pos);
+                    bajaPersona (persona,C,indice);
                 }
                  else
                 {
-                    printf("Supero el espacio permitido para carga.");
+                    printf("\nEl DNI ingresado no existe.\n");
                 }
                 break;
 
