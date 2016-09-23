@@ -41,7 +41,7 @@ int validarMenu (eMenu opciones)
             system("cls");
             printf("%s",opciones.error);
             fflush(stdin);
-            getc(respuesta);
+            scanf("%c",&respuesta);
             opcion=-1;
         }
     }
@@ -78,7 +78,7 @@ int buscarIndiceLibre (ePersona persona[],int C)
         return i;
     }else
     {
-        return -1; //si no encuentra ubicacion
+        return -1;
     }
 }
 
@@ -104,7 +104,7 @@ void altaPersona(ePersona persona[],int indice,int estado)
         {
             printf("Nombre invalido, debe ingresar entre 1 y 50 caracteres.\n¿Desea continuar? s/n: ");
             fflush(stdin);
-            getc(seguir);
+            scanf("%c",&seguir);
         }
     }
 
@@ -219,7 +219,7 @@ void listarPersonas(ePersona persona[],int C)
     int i=0;
     int j=0;
     ePersona personaAux;
-    printf("DNI\t NOMBRE\t EDAD\t ESTADO\n");
+    printf("DNI\t\tNOMBRE\tEDAD\tESTADO\n");
     for(i=0;i<C-1;i++)
     {
         if(persona[i].estado==1)

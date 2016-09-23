@@ -26,23 +26,85 @@ typedef struct {
 
 }ePersona;
 
-
+/**
+ * Hardcodea personas para poder realizar pruebas.
+ * @param array de estructura persona.
+ * @param  maxima cantidad de componentes del vector.
+ */
 void hardcodeo(ePersona persona[],int Caux);
-void asignarEstado (ePersona persona[],int C,int estado);
-int validarMenu(eMenu opciones);
-void altaPersona(ePersona persona[],int indice,int estado);
-void bajaPersona (ePersona persona[],int C, int indice);
-void listarPersonas(ePersona persona[],int);
-int validarString(eValidar cadena);
-int validarInt(eValidar cadena);
-int contarPorEdad (ePersona persona[],int C,int* menor18,int* de18a35,int* mayor35);
-void graficar (int cantidadMenor18,int cantidadDe18a35, int cantidadMayor35);
 
+/**
+ * Se asigna estado 'Vacío' a todos los componentes del vector persona.
+ * @param array de estructura persona.
+ * @param maxima cantidad de componentes del vector.
+ * @param estado.
+ */
+void asignarEstado (ePersona persona[],int C,int estado);
+
+/**
+ * Valida que la opcion ingresada del menu sea correcta.
+ * @param array de estructura menu.
+ * @return Opcion valida o, en el caso de ser invalida, devuelve -1.
+ */
+int validarMenu(eMenu opciones);
+
+/**
+ * Cargar una persona.
+ * @param array de estructura persona.
+ * @param cantidad maxima de elementos posibles del vector.
+ * @param posicion del vector
+ * @param estado del registro.
+ */
+void altaPersona(ePersona persona[],int indice,int estado);
+
+/**
+ * Eliminar una persona mediante baja logica.
+ * @param cantidad maxima de elementos posibles del vector, posicion del vector.
+ * @param estructura persona.
+ */
+void bajaPersona (ePersona persona[],int C, int indice);
+
+/**
+ * Realizar una lista de registros activos, ordenada por nombre.
+ * @param array de estructura persona.
+ * @param cantidad maxima de elementos posibles del vector.
+ */
+void listarPersonas(ePersona persona[],int);
+
+/**
+ * Valida el dato char ingresado por el usuario.
+ * @param estructura que incluye: String ingresado por usuario y cantidad de caracteres permitidos.
+ * @return 1 si es correcto, 0 si es incorrecto.
+ */
+int validarString(eValidar cadena);
+
+/**
+ * Valida el dato int ingresado por el usuario.
+ * @param estructura que incluye: String ingresado por usuario.
+ * @param rango de numeros permitidos.
+ * @return 1 si es correcto, 0 si es incorrecto.
+ */
+int validarInt(eValidar cadena);
+
+/**
+ * Cuenta cantidad de personas de cada rango etario.
+ * @param array de estructura persona..
+ * @param cantidad maxima de elementos posibles del vector.
+ * @param punteros de cada rango etario.
+ * @return 1 si es correcto, 0 si es incorrecto.
+ */
+int contarPorEdad (ePersona persona[],int C,int* menor18,int* de18a35,int* mayor35);
+
+/**
+ * Grafico que muestra cantidad de personas por rango etario.
+ * @param punteros de cada rango etario.
+ */
+void graficar (int cantidadMenor18,int cantidadDe18a35, int cantidadMayor35);
 
 
 /**
  * Obtiene el primer indice libre del array.
- * @param lista el array se pasa como parametro.
+ * @param array de estructura persona.
  * @return el primer indice disponible
  */
 int buscarIndiceLibre (ePersona persona[],int C);
@@ -50,9 +112,10 @@ int buscarIndiceLibre (ePersona persona[],int C);
 
 /**
  * Obtiene el indice que coincide con el dni pasado por parametro.
- * @param lista el array se pasa como parametro.
- * @param dni el dni a ser buscado en el array.
- * @return el indice en donde se encuentra el elemento que coincide con el parametro dni
+ * @param array de estructura persona.
+ * @param dni ingresado por el usuario.
+ * @param cantidad maxima de elementos posibles del vector.
+ * @return el indice en donde se encuentra el elemento que coincide con el parametro dni.
  */
-int buscarPorDni(ePersona lista[], char dni[], int C);
+int buscarPorDni(ePersona persona[], char dni[], int C);
 

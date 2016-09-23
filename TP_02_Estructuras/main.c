@@ -79,7 +79,7 @@ int main()
             break;
         }
 
-    } while (seguir=='s');
+    } while (seguir=='s'||opcion==-1);
 
 
     return;
