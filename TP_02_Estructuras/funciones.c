@@ -5,10 +5,10 @@
 
 void hardcodeo(ePersona persona[],int Caux)
 {
-    char dniAux[5][20]={"123456","456789","789456","456123","321654"};
-    char nombreAux[5][50]={"Juana","Pedro","Anastasia","Vanina","Daniel"};
-    int estadoAux[5]={1,1,1,1,1};
-    int edadAux[5]={10,20,30,40,50};
+    char dniAux[10][20]={"50123456","45456789","43789456","40456123","35321654","30951753","25753159","20357951","15159753","10789321"};
+    char nombreAux[10][50]={"Juana","Pedro","Marcela","Vanina","Daniel","Diana","Facundo","Laura","Lautaro","Andres"};
+    int estadoAux[10]={1,1,1,1,1,1,1,1,1,1};
+    int edadAux[10]={10,15,18,25,30,36,40,45,50,55};
     int i=0;
 
     for(i==0;i<Caux;i++)
@@ -246,6 +246,81 @@ void listarPersonas(ePersona persona[],int C)
         }
 
     }
+}
+
+int contarPorEdad (ePersona persona[],int C,int* menor18,int* de18a35,int* mayor35)
+{
+    int i;
+    for (i=0;i<C;i++)
+    {
+        if(persona[i].estado==1 && persona[i].edad<18)
+        {
+            *menor18= *menor18+1;
+        }
+        else if (persona[i].estado==1 && persona[i].edad>35)
+        {
+            *mayor35=*mayor35+1;
+        }
+        else if (persona[i].estado==1 && persona[i].edad>=18 && persona[i].edad<=35)
+        {
+            *de18a35=*de18a35+1;
+        }
+    }
+
+    return 0;
+}
+
+
+void graficar (int cantidadMenor18,int cantidadDe18a35, int cantidadMayor35)
+{
+    int tope=0;
+    int i=0;
+
+    if(cantidadMenor18>=cantidadMayor35 && cantidadMenor18>=cantidadDe18a35)
+    {
+        tope=cantidadMenor18;
+    }
+    else if(cantidadMayor35>=cantidadMenor18 && cantidadMayor35>=cantidadDe18a35)
+    {
+        tope=cantidadMayor35;
+    }
+    else if(cantidadDe18a35>=cantidadMenor18 && cantidadDe18a35>=cantidadMayor35)
+    {
+        tope=cantidadDe18a35;
+    }
+
+    for (i=tope;i>0;i--)
+    {
+        printf("%d|",i);
+        int flag=0;
+
+        if(i<=cantidadMenor18)
+        {
+            printf("*");
+        }
+        if (i<=cantidadDe18a35)
+        {
+            printf("\t*");
+            flag=1;
+        }
+        if (i<=cantidadMayor35)
+        {
+            if(flag==0)
+            {
+                printf("\t\t*");
+            }
+            if(flag==1)
+            {
+                printf("\t*");
+            }
+        }
+        printf("\n");
+    }
+    printf("\n");
+    printf("<18\t18-35\t>35");
+    printf("\n");
+    printf("%d\t %d \t%d\n",cantidadMenor18,cantidadDe18a35,cantidadMayor35);
+    printf("\n");
 }
 
 

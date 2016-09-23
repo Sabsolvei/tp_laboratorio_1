@@ -26,6 +26,7 @@ typedef struct {
 
 }ePersona;
 
+
 void hardcodeo(ePersona persona[],int Caux);
 void asignarEstado (ePersona persona[],int C,int estado);
 int validarMenu(eMenu opciones);
@@ -34,6 +35,8 @@ void bajaPersona (ePersona persona[],int C, int indice);
 void listarPersonas(ePersona persona[],int);
 int validarString(eValidar cadena);
 int validarInt(eValidar cadena);
+int contarPorEdad (ePersona persona[],int C,int* menor18,int* de18a35,int* mayor35);
+void graficar (int cantidadMenor18,int cantidadDe18a35, int cantidadMayor35);
 
 
 

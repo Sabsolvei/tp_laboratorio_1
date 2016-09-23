@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "funciones.h"
-#define Caux 5
+#define Caux 10
 #define C 20
 #define VACIO -1
 #define ALTA 1
@@ -21,16 +21,20 @@ int main()
     char seguir='s';
     int indice=0;
     char dni[20];
-
+    int menor18=0;
+    int de18a35=0;
+    int mayor35=0;
 
     do
     {
+        system("pause");
+        system("cls");
         opcion= validarMenu(opciones);
 
         switch(opcion)
         {
             case 1:
-
+                system("cls");
                 indice=buscarIndiceLibre(persona,C);
 
                 if(indice >= 0)
@@ -43,7 +47,7 @@ int main()
                 }
                 break;
             case 2:
-
+                system("cls");
                 printf("Ingrese DNI a eliminar: ");
                 fflush(stdin);
                 gets(dni);
@@ -57,18 +61,22 @@ int main()
                 {
                     printf("\nEl DNI ingresado no existe.\n");
                 }
-                break;
+            break;
 
             case 3:
-
+                system("cls");
                 listarPersonas(persona,C);
-                break;
+            break;
+
             case 4:
-                //FUNCION GRAFICO
-                break;
+                system("cls");
+                contarPorEdad(persona,C,&menor18,&de18a35,&mayor35);
+                graficar(menor18,de18a35,mayor35);
+            break;
+
             case 5:
-                opcion = -1;
-                break;
+                seguir='n';
+            break;
         }
 
     } while (seguir=='s');
