@@ -95,14 +95,14 @@ void altaPersona(ePersona persona[],int indice,int estado)
         fflush(stdin);
         gets(cadena.buffer);
 
-        if(validarString(cadena)==1)
+        if(validarRango(cadena)==1)
         {
             strcpy(persona[indice].nombre,cadena.buffer);
             break;
         }
         else
         {
-            printf("Nombre invalido, debe ingresar entre 1 y 50 caracteres.\n¿Desea continuar? s/n: ");
+            printf("Nombre invalido. Debe ingresar nombre entre 1 y 50 caracteres.\n¿Desea continuar? s/n: ");
             fflush(stdin);
             scanf("%c",&seguir);
         }
@@ -116,7 +116,7 @@ void altaPersona(ePersona persona[],int indice,int estado)
         cadena.minimo=1;
         cadena.maximo=100;
 
-        if(validarInt(cadena)==1)
+        if(validarRangoEdad(cadena)==1)
         {
             persona[indice].edad = atoi(cadena.buffer);
             break;
@@ -131,20 +131,20 @@ void altaPersona(ePersona persona[],int indice,int estado)
 
     while(seguir=='s')
     {
+        cadena.minimo=1000000;
+        cadena.maximo=99000000;
         printf("Ingrese DNI: ");
         fflush(stdin);
         gets(cadena.buffer);
-        cadena.minimo=5;
-        cadena.maximo=20;
 
-        if(validarString(cadena)==1)
+        if(verificarDNI(cadena)==1)
         {
             strcpy(persona[indice].dni,cadena.buffer);
             break;
         }
         else
         {
-            printf("DNI invalido, debe ingresar entre 5 y 20 caracteres.\n¿Desea continuar? s/n: ");
+            printf("Debe ingresar DNI valido, sin puntos.\n¿Desea continuar? s/n: ");
             fflush(stdin);
             scanf("%c",&seguir);
         }
@@ -158,7 +158,7 @@ void altaPersona(ePersona persona[],int indice,int estado)
 }
 
 
-int validarInt(eValidar cadena)
+int validarRangoEdad(eValidar cadena)
 {
     int edad;
     edad=atoi(cadena.buffer);
@@ -172,17 +172,50 @@ int validarInt(eValidar cadena)
     }
 }
 
-int validarString(eValidar cadena)
+int verificarDNI(eValidar cadena)
+{
+    int dni;
+    if((strlen(cadena.buffer))==8)
+    {
+        dni=atoi(cadena.buffer);
+
+        if (dni>=cadena.minimo && dni<=cadena.maximo)
+        {
+          return 1;
+        }
+    }
+    return 0;
+}
+
+int validarRango(eValidar cadena)
 {
     if((strlen(cadena.buffer)>= cadena.minimo) && (strlen(cadena.buffer)<=cadena.maximo))
     {
-        return 1;
+        if(!validarStr(cadena))
+        {
+            return 0;
+        }
     }
-    else
-    {
-        return 0;
-    }
+    return 1;
 }
+
+int validarStr(eValidar cadena)
+{
+    int i = 0;
+    char letra;
+
+    while(cadena.buffer[i] != '\0')
+    {
+        letra=(char)cadena.buffer[i];
+        if(!isalpha(letra))
+        {
+            return 0;
+        }
+       i++;
+    }
+    return 1;
+}
+
 
 int buscarPorDni(ePersona persona[], char dni[], int C)
 {

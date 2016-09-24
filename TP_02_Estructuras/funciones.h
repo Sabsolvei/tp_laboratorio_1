@@ -72,11 +72,26 @@ void bajaPersona (ePersona persona[],int C, int indice);
 void listarPersonas(ePersona persona[],int);
 
 /**
+ * Valida el dni ingresado por el usuario.
+ * @param estructura que incluye: String ingresado por usuario.
+ * @param rango de numeros permitidos.
+ * @return 1 si es correcto, 0 si es incorrecto.
+ */
+int verificarDNI(eValidar cadena);
+
+/**
  * Valida el dato char ingresado por el usuario.
  * @param estructura que incluye: String ingresado por usuario y cantidad de caracteres permitidos.
  * @return 1 si es correcto, 0 si es incorrecto.
  */
-int validarString(eValidar cadena);
+int validarRango(eValidar cadena);
+
+/**
+ * Valida el dato char ingresado por el usuario.
+ * @param estructura que incluye: String ingresado por usuario.
+ * @return 1 si es correcto, 0 si es incorrecto.
+ */
+int validarStr(eValidar cadena);
 
 /**
  * Valida el dato int ingresado por el usuario.
@@ -84,11 +99,11 @@ int validarString(eValidar cadena);
  * @param rango de numeros permitidos.
  * @return 1 si es correcto, 0 si es incorrecto.
  */
-int validarInt(eValidar cadena);
+int validarRangoEdad(eValidar cadena);
 
 /**
  * Cuenta cantidad de personas de cada rango etario.
- * @param array de estructura persona..
+ * @param array de estructura persona.
  * @param cantidad maxima de elementos posibles del vector.
  * @param punteros de cada rango etario.
  * @return 1 si es correcto, 0 si es incorrecto.
@@ -118,4 +133,5 @@ int buscarIndiceLibre (ePersona persona[],int C);
  * @return el indice en donde se encuentra el elemento que coincide con el parametro dni.
  */
 int buscarPorDni(ePersona persona[], char dni[], int C);
+
 
