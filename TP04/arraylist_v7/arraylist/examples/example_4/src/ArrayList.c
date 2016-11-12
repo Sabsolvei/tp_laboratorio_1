@@ -268,11 +268,11 @@ int al_indexOf(ArrayList* pList, void* pElement)
 {
     int returnAux = -1;
     int i = 0;
-    if(pList != NULL)
+    if(pList != NULL && pElement != NULL)
     {
         for(i = 0; i <= pList->size; i++)
         {
-            if(pList->pElements[i] == pElement)
+            if(*(pList->pElements+i) == pElement)
             {
                 returnAux = i;
                 break;
@@ -378,76 +378,49 @@ int al_containsAll(ArrayList* pList,ArrayList* pList2)
  */
 int al_sort(ArrayList* pList, int (*pFunc)(void*,void*), int order)
 {
-    int returnAux = -1;
-    int i = 0, j = 0;
-    int tam = al_len(pList);
-    if(pList != NULL && (order == 1 || order == 0))
-    {
-        for (i = 0; i < tam-1; i++)
-        {
-            for(j = i+1; j< tam; j++)
-            {
-                if(order==1 && pFunc(pList->pElements[i],pList->pElements[j])>0)
-                {
-                    al_swap(pList->pElements[i], pList->pElements[j]);
-                }
-                else if(order==0 && pFunc(pList->pElements[i],pList->pElements[j])<0)
-                {
-                    al_swap(pList->pElements[i], pList->pElements[j]);
-                }
-            }
-        }
-    }
-    return returnAux;
-
-    /*
-
-    int al_sort(ArrayList* pList, int (*pFunc)(void* ,void*), int order)
-    {
-    int returnAux = -1,i,j;
-    void* aux;
+    int returnAux = -1, i = 0, j = 0;
+    int length = al_len(pList);
+    void * aux;
     if(pList != NULL && pFunc != NULL && (order == 1 || order == 0))
     {
-    for(i=0;i < pList->size-1; i++)
-    {
-        for(j=i+1;j<pList->size;j++)
+        for (i = 0; i < length-1; i++)
         {
-            if(order==1 && pFunc(pList->pElements[i],pList->pElements[j])>0)
+            for(j = i+1; j< length; j++)
             {
-                aux = pList->pElements[i];
-                pList->pElements[i] = pList->pElements[j];
-                pList->pElements[j] = aux;
-                returnAux = 0;
-            }
-            else if(order==0 && pFunc(pList->pElements[i],pList->pElements[j])<0)
+                if(order==1)
                 {
-                    aux = pList->pElements[i];
-                    pList->pElements[i] = pList->pElements[j];
-                    pList->pElements[j] = aux;
-                    returnAux = 0;
+                    if(pFunc(*(pList->pElements+i),*(pList->pElements+j))>0)
+                    {
+                        //al_swap(*(pList->pElements+i),*(pList->pElements+j));
+                        aux = pList->pElements[i];
+                        pList->pElements[i] = pList->pElements[j];
+                        pList->pElements[j] = aux;
+                        returnAux = 0;
+                    }
                 }
+                else
+                {
+                    if((order==0) && pFunc(*(pList->pElements+i),*(pList->pElements+j))<0)
+                    {
+                        //al_swap(*(pList->pElements+i),*(pList->pElements+j));
+                        aux = pList->pElements[i];
+                        pList->pElements[i] = pList->pElements[j];
+                        pList->pElements[j] = aux;
+                    }
+                }
+            }
         }
-    }
+         returnAux = 0;
     }
     return returnAux;
-    }
-
-
-    string compare
-    izq > der -1
-    int (*pFunc)(void*,void*) -> se pone el nombre del puntero a la funcion
-    LLAMADA -> al_sort (plist,sumar,1);
-
-    las funciones Compare se hacen las necesarias para el negocio.
-    */
 }
 
-void al_swap(void* A, void* B)
+void al_swap(void* a, void* b)
 {
     void* aux;
-    aux = A;
-    A = B;
-    B = aux;
+    aux = a;
+    a = b;
+    b = aux;
 }
 
 /** \brief Increment the number of elements in pList in AL_INCREMENT elements.
@@ -470,16 +443,35 @@ int resizeUp(ArrayList* pList)
                 pList->reservedSize = pList->reservedSize + AL_INCREMENT;
                 returnAux = 0;
             }
-            else
+        }
+    }
+    return returnAux;
+}
+
+/** \brief Increment the number of elements in pList in AL_INCREMENT elements.
+* \param pList ArrayList* Pointer to arrayList
+* \return int Return (-1) if Error [pList is NULL pointer or if can't allocate memory]
+*                  - (0) if ok
+*/
+int resizeDown(ArrayList* pList)
+{
+    void* auxElements;
+    int returnAux = -1;
+    if(pList != NULL)
+    {
+        if(pList->reservedSize > pList->size+AL_INCREMENT)
+        {
+            auxElements = (void *)realloc(pList->pElements,sizeof(void *) * (pList->size + AL_INCREMENT));
+            if(auxElements != NULL)
             {
+                pList->pElements = auxElements;
+                pList->reservedSize = pList->size + AL_INCREMENT;
                 returnAux = 0;
             }
         }
     }
     return returnAux;
 }
-
-
 
 /** \brief  Contract an array list
  * \param pList ArrayList* Pointer to arrayList
@@ -497,13 +489,11 @@ int contract(ArrayList* pList,int index)
             pList->pElements[i-1] = pList->pElements[i];
         }
         pList->size--;
+        resizeDown(pList);
         returnAux = 0;
     }
     return returnAux;
 }
-
-
-
 
 /** \brief  Expand an array list
  * \param pList ArrayList* Pointer to arrayList
@@ -525,3 +515,14 @@ int expand(ArrayList* pList,int index)
     }
     return returnAux;
 }
+
+
+/*
+    string compare
+    izq > der -1
+    int (*pFunc)(void*,void*) -> se pone el nombre del puntero a la funcion
+    LLAMADA -> al_sort (plist,sumar,1);
+
+    las funciones Compare se hacen las necesarias para el negocio.
+
+}*/

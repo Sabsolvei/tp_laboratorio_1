@@ -203,7 +203,7 @@ int al_containsAll(ArrayList* pList,ArrayList* pList2);
  */
 int al_sort(ArrayList* pList, int (*pFunc)(void* ,void*), int order);
 
-void al_swap(void* A, void* B);
+void al_swap(void* a, void* b);
 
 /** \brief Increment the number of elements in pList in AL_INCREMENT elements.
  * \param pList ArrayList* Pointer to arrayList
@@ -212,6 +212,7 @@ void al_swap(void* A, void* B);
  */
 int resizeUp(ArrayList* pList);
 
+int resizeDown(ArrayList* pList);
 
 /** \brief  Expand an array list
  * \param pList ArrayList* Pointer to arrayList
