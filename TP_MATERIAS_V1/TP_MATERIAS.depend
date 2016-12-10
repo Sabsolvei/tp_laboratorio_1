@@ -1,0 +1,50 @@
+# depslib dependency file v1.0
+1480459596 source:d:\workspaceprogramacion\modeloparciales\tp_materias\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"arraylist.h"
+	"controller.h"
+
+1480467084 d:\workspaceprogramacion\modeloparciales\tp_materias\arraylist.h
+
+1481230984 d:\workspaceprogramacion\modeloparciales\tp_materias\controller.h
+	"Materias.h"
+	"ArrayList.h"
+
+1481299248 source:d:\workspaceprogramacion\modeloparciales\tp_materias\controller.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Materias.h"
+	"ArrayList.h"
+	"Controller.h"
+	"utn.h"
+
+1481298254 d:\workspaceprogramacion\modeloparciales\tp_materias\materias.h
+
+1481298411 source:d:\workspaceprogramacion\modeloparciales\tp_materias\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"Controller.h"
+	"utn.h"
+
+1481298322 source:d:\workspaceprogramacion\modeloparciales\tp_materias\materias.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Materias.h"
+	"ArrayList.h"
+	"Controller.h"
+
+1481297745 source:d:\workspaceprogramacion\modeloparciales\tp_materias\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	"utn.h"
+
+1475961036 d:\workspaceprogramacion\modeloparciales\tp_materias\utn.h
+
